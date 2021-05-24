@@ -53,7 +53,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
   initWiFi();
   dht.begin();                            
   initEpochTime();
-   webSocket.begin("{local IP}", 80,"/device");
+   webSocket.begin("192.168.0.243", 80,"/device");
    webSocket.onEvent(webSocketEvent);
     // try ever 5000 again if connection has failed
   webSocket.setReconnectInterval(5000);
@@ -66,9 +66,9 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
    epochTime = time(NULL);
    if ((millis() - prevTime) > 10000){ 
     String json = "{\"temp\":";
-    json += temperature;
+    json += 23.4;
     json += ",\"humidity\":";
-    json += humidity;
+    json += 32;
     json += ",\"deviceId\":";
     json += "\"esp32\"";
     json += ",\"time\":";
