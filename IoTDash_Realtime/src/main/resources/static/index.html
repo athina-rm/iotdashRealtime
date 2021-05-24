@@ -3,11 +3,44 @@
 <head>
     <title>Hello WebSocket</title>
     <script src="./app.js"></script>
+    <style>
+        table{
+            margin-left: 100px;
+            margin-top: 100px;
+        }
+        td {
+            width : 200px;
+            height :50px;
+        }
+
+        #ttitle{
+            background-color: rgb(255, 217, 0);
+            text-align: center;
+        }
+        #htitle{
+            background-color: rgb(127, 187, 255);
+            text-align: center;
+        }
+
+        .val{
+            background-color: grey;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
         <!-- texten i textarean kommer att sättas i app.js -->
         <textarea readonly="true" rows="1" cols="50" id="deviceStatus"></textarea>
         <!--<button type="button" onclick="toggle();" >Toggle</button>-->
+        <table>
+            <tr>
+                <td id="ttitle">Temperatur</td><td id="tempValue" class="val"></td>
+            </tr>
+            <tr>
+                <td id="htitle">Humidity</td><td id="humidityValue" class="val"></td>
+            </tr>
+        </table>
 
 </div>
 </body>
