@@ -1,5 +1,7 @@
 package com.example.iotdashrealtime;
 
+import com.example.iotdashrealtime.Models.deviceData;
+import com.example.iotdashrealtime.repositories.DeviceDataDAO;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -17,25 +19,22 @@ public class SocketHandler extends TextWebSocketHandler {
 
     //Thread safe list
     List <WebSocketSession>sessions = new CopyOnWriteArrayList<>();
-
-    //Device device = new Device();
+    DeviceDataDAO data = new DeviceDataDAO();
+    TextMessage prevData;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        //the messages will be broadcasted to all users.
         sessions.add(session);
-        //läser av vårt device och skickar ut status
-        //session.sendMessage(new TextMessage(device.getStateString()));
+        if(prevData!=null)
+        session.sendMessage(prevData);
     }
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message)
             throws InterruptedException, IOException {
-        Map value = new Gson().fromJson(message.getPayload(), Map.class);
-        System.out.println(message.getPayload());
-        //sätter status på devicet
-        //device.setDeviceId((String)value.get("deviceId"));
-        //System.out.println((String)value.get("deviceId"));
+        deviceData d = new Gson().fromJson(message.getPayload(), deviceData.class);
+        data.addData(d);
+        prevData=message;
         for(WebSocketSession webSocketSession : sessions) {
             if(webSocketSession!=session)
             webSocketSession.sendMessage(message);
