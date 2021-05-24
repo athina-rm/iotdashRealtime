@@ -70,7 +70,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
     json += ",\"humidity\":";
     json += humidity;
     json += ",\"deviceId\":";
-    json += DEVICE_ID;
+    json += "\"esp32\"";
     json += ",\"time\":";
     json += epochTime;
     json += "}";
