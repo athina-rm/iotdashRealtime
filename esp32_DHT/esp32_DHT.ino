@@ -65,7 +65,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
    float humidity=dht.readHumidity();           //taking humidity data
    epochTime = time(NULL);
    if ((millis() - prevTime) > 10000){ 
-    String json = "{\"temperature\":";
+    String json = "{\"temp\":";
     json += temperature;
     json += ",\"humidity\":";
     json += humidity;
