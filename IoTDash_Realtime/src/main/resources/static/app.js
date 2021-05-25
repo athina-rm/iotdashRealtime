@@ -11,8 +11,8 @@ ws.onmessage = function(event) {
     var tempValue=document.getElementById("tempValue");
     tempValues.push(message.temp);
     tempValue.innerHTML=message.temp;
-    var humidity=document.getElementById("humidityValue");
-    humidity.innerHTML=message.humidity;
+    var humidityValue=document.getElementById("humidityValue");
+    humidityValue.innerHTML=message.humidity;
     humidityValues.push(message.humidity);
     var lowest=document.getElementById("lowest");
     lowest.innerHTML=message.lowest;
