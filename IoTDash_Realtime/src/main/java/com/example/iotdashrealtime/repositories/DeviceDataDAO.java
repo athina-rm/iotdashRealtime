@@ -1,5 +1,6 @@
 package com.example.iotdashrealtime.repositories;
 
+import com.example.iotdashrealtime.Models.Extreme;
 import com.example.iotdashrealtime.Models.deviceData;
 
 import java.io.FileInputStream;
@@ -53,32 +54,27 @@ public class DeviceDataDAO {
         return  false;
     }
 
-    /*public String Forecast() {
-
-        String forecast = "";
-        String quary = "select max(temp) as Todays_Highest , min(temp) as Todays_Lowest,  ROUND(avg(temp),2) as Todays_avg from dbo.dhtmeasurements  where date =  CONVERT(date, SYSDATETIME())";
+    public Extreme getExtremes() {
+        Extreme extremes=null;
+        String query = "select max(temp) as Todays_Highest , min(temp) as Todays_Lowest  from dbo.dhtmeasurements  where date =  CONVERT(date, SYSDATETIME())";
         try {
             Properties p = new Properties();
-            p.load(new FileInputStream("src/main/resources/application.properties"));
+            p.load(new FileInputStream("C:\\Users\\athin\\OneDrive\\Documents\\nackademin\\SystemIntegration\\IotDashRealtime\\IoTDash_Realtime\\src\\main\\resources\\application.properties"));
             Connection con = DriverManager.getConnection(p.getProperty("connectionString"),p.getProperty("username"),p.getProperty("password"));
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(quary);
+             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 float Highest = rs.getFloat("Todays_Highest");
                 float Lowest = rs.getFloat("Todays_Lowest");
-                float Average = rs.getFloat("Todays_avg");
-                forecast += "Highest " + Highest + " Lowest " + Lowest + " Average " + Average;
-                System.out.println(forecast);
-
-
+                extremes=new Extreme(Highest,Lowest);
             }
         } catch (SQLException | FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return forecast;
-    }*/
+        return extremes;
+    }
 
 }

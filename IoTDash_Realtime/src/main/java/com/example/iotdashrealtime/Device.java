@@ -1,10 +1,5 @@
 package com.example.iotdashrealtime;
 
-
-/*
-Simulerar ett interface till att ett enkelt device som man kan sätta av och stänga av.
- */
-
 public class Device {
     String deviceId;
 

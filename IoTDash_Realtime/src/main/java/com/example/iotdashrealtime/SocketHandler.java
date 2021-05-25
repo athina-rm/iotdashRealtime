@@ -3,6 +3,8 @@ package com.example.iotdashrealtime;
 import com.example.iotdashrealtime.Models.deviceData;
 import com.example.iotdashrealtime.repositories.DeviceDataDAO;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -35,9 +37,15 @@ public class SocketHandler extends TextWebSocketHandler {
         deviceData d = new Gson().fromJson(message.getPayload(), deviceData.class);
         data.addData(d);
         prevData=message;
+        System.out.println(message.getPayload());
+        JsonObject currentData=new Gson().toJsonTree(d).getAsJsonObject();
+        JsonObject currentExtremes= (JsonObject) new Gson().toJsonTree(data.getExtremes());
+        for (Map.Entry<String, JsonElement> entry : currentExtremes.entrySet()) {
+            currentData.add(entry.getKey(), entry.getValue());
+        }
         for(WebSocketSession webSocketSession : sessions) {
             if(webSocketSession!=session)
-            webSocketSession.sendMessage(message);
+            webSocketSession.sendMessage(new TextMessage(new Gson().toJson(currentData)));
         }
     }
     @Override
