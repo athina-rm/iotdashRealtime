@@ -31,6 +31,17 @@
 <body>
    <h1>ESP32/ESP8266 Weather Report</h1>
        <!-- <textarea readonly="true" rows="1" cols="125" id="deviceStatus"></textarea> -->
+   <div>
+       <table id="DT">
+           <tr>
+               <td> <img src="calendar.jpeg" id="calendaricon"> </td>
+               <td> <img src="clock.jpeg" id="clockicon"></td>
+           </tr>
+           <tr>
+               <td id="calendar"></td>
+               <td id="clock"></td>
+           </tr>
+       </table>
         <table id="first">
             <tr>
                 <td id="ttitle">Temperature</td><td id="tempValue" class="val"></td>
@@ -39,16 +50,7 @@
                 <td id="htitle">Humidity</td><td id="humidityValue" class="val"></td>
             </tr>
         </table>
-    <table id="DT">
-        <tr>
-            <td> <img src="calendar.jpeg" id="calendaricon"> </td>
-            <td> <img src="clock.jpeg" id="clockicon"></td>
-        </tr>
-        <tr>
-            <td id="calendar"></td>
-            <td id="clock"></td>
-        </tr>
-    </table>
+
 
     <table id="second" >
         <tr>
@@ -70,7 +72,7 @@
               <td id="average" class="s">EXAMPLE 1 </td>
           </tr>-->
       </table>
-
+   </div>
       <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
 </body>
 </html>
