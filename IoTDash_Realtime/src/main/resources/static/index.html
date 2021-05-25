@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello WebSocket</title>
+    <title>IoTDashboard</title>
     <script src="./app.js"></script>
-    <style>
-        table{
-            margin-left: 100px;
-            margin-top: 100px;
-        }
-        td {
-            width : 200px;
-            height :50px;
-        }
-        #ttitle{
-            background-color: rgb(255, 217, 0);
-            text-align: center;
-        }
-        #htitle{
-            background-color: rgb(127, 187, 255);
-            text-align: center;
-        }
-        .val{
-            background-color: grey;
-            text-align: center;
-        }
-    </style>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <link rel="stylesheet" href="css.css">
+    <!-- <style>
+       table{
+           margin-left: 100px;
+           margin-top: 100px;
+       }
+       td {
+           width : 200px;
+           height :50px;
+       }
+       #ttitle{
+           background-color: rgb(255, 217, 0);
+           text-align: center;
+       }
+       #htitle{
+           background-color: rgb(127, 187, 255);
+           text-align: center;
+       }
+       .val{
+           background-color: grey;
+           text-align: center;
+       }
+   </style>-->
 </head>
 <body>
-        <!-- texten i textarean kommer att sättas i app.js -->
-        <textarea readonly="true" rows="1" cols="50" id="deviceStatus"></textarea>
-        <!--<button type="button" onclick="toggle();" >Toggle</button>-->
+   <h1>ESP32/ESP8266 Weather Report</h1>
+       <!-- <textarea readonly="true" rows="1" cols="125" id="deviceStatus"></textarea> -->
         <table>
             <tr>
                 <td id="ttitle">Temperature</td><td id="tempValue" class="val"></td>
@@ -38,7 +39,38 @@
                 <td id="htitle">Humidity</td><td id="humidityValue" class="val"></td>
             </tr>
         </table>
+    <table id="DT">
+        <tr>
+            <td> <img src="calendar.jpeg" id="calendaricon"> </td>
+            <td> <img src="clock.jpeg" id="clockicon"></td>
+        </tr>
+        <tr>
+            <td id="calendar"></td>
+            <td id="clock"></td>
+        </tr>
+    </table>
 
-</div>
+    <table id="second" >
+        <tr>
+            <td id = "hitiltle"> Days Highest</td>
+        </tr>
+        <tr>
+            <td id="highest" class="s"></td>
+        </tr>
+        <tr>
+            <td id ="ltitle">Days Lowest </td>
+        </tr>
+        <tr>
+            <td id="lowest" class="s"></td>
+        </tr>
+        <!--  <tr>
+              <td id ="atitle">Average</td>
+          </tr>
+          <tr>
+              <td id="average" class="s">EXAMPLE 1 </td>
+          </tr>-->
+      </table>
+
+      <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
 </body>
 </html>
