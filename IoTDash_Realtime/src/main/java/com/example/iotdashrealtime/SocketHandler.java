@@ -36,16 +36,16 @@ public class SocketHandler extends TextWebSocketHandler {
             throws InterruptedException, IOException {
         deviceData d = new Gson().fromJson(message.getPayload(), deviceData.class);
         data.addData(d);
-        prevData=message;
-        System.out.println(message.getPayload());
         JsonObject currentData=new Gson().toJsonTree(d).getAsJsonObject();
         JsonObject currentExtremes= (JsonObject) new Gson().toJsonTree(data.getExtremes());
         for (Map.Entry<String, JsonElement> entry : currentExtremes.entrySet()) {
             currentData.add(entry.getKey(), entry.getValue());
         }
         for(WebSocketSession webSocketSession : sessions) {
-            if(webSocketSession!=session)
-            webSocketSession.sendMessage(new TextMessage(new Gson().toJson(currentData)));
+            if(webSocketSession!=session) {
+                prevData=new TextMessage(new Gson().toJson(currentData));
+                webSocketSession.sendMessage(prevData);
+            }
         }
     }
     @Override
